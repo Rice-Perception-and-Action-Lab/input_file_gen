@@ -1,4 +1,4 @@
-# vr_file_gen
+# input_file_gen
 
 The input file generator for the [Rice-Perception-and-Action-Lab VR program](https://github.com/Rice-Perception-and-Action-Lab/VR)
 
