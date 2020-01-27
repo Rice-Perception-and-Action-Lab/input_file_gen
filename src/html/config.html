@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- MATERIAL ICONS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!-- jQuery first, then jQuery min.js, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Custom Stylesheets -->
+    <link href="../assets/css/index.css" rel="stylesheet">
+    <link href="../assets/css/config.css" rel="stylesheet">
+
+    <!-- Custom Scripts -->
+    <script src="../js/config.js"></script>
+
+    <title>VR File Builder</title>
+  </head>
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <nav class="nav nav-masthead justfiy-content-center mx-auto">
+            <a class="nav-link" href="./index.html">Back</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <div class="container">
+          <div class="py-5 text-center">
+            <h2>Config File Builder</h2>
+            <p class="lead">
+              Enter the experiment parameters to create a basic configuration file that is formatted for use with the VR Simulator. The experimenter will change certain parameters in this file between experiments.
+            </p>
+          </div>
+
+          <form id="configForm">
+            <hr class="mb-4 mt-4">
+
+            <div class="form-group text-left">
+              <label for="subjNum" class="font-weight-bold">Subject Number</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="The subject number should be a positive number reflecting the current subject undergoing the experiment. The number you enter here is just a placeholder to generate the initial config file and it must be manually changed between subjects so that the results files are correct." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-2">
+                <input type="number" class="form-control" id="subjNum" placeholder="1" value="1">
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="subjSex" class="font-weight-bold">Subject Sex</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="0 = female and 1 = male" style="font-size:15px;">help_outline</i>
+              <div class="row col-md-2">
+                <input type="number" class="form-control" id="subjSex" placeholder="1" value="0">
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="session" class="font-weight-bold">Session</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Number that denotes the experimental session" style="font-size:15px;">help_outline</i>
+              <div class="row col-md-2">
+                <input type="number" class="form-control" id="session" placeholder="1" value="1">
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="group" class="font-weight-bold">Group</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Number that denotes the experimental group" style="font-size:15px;">help_outline</i>
+              <div class="row col-md-2">
+                <input type="number" class="form-control" id="group" placeholder="1" value="1">
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="dataFile" class="font-weight-bold">Trial File</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Enter the name of an existing file that defines the trials that will be shown to the subject during the experiment. Note that you do not need to include the '.json' suffix at the end of the file name." style="font-size:15px;">help_outline</i>
+              <div class="row input-group col-md-8">
+                <input type="text" class="form-control" id="dataFile" placeholder="input_file" aria-describedby="json-addon">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="json-addon">.json</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="cameraLock" class="font-weight-bold">Camera Lock</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Camera Lock false means the coordinates are in reference to the VR play area. True means that the coordinates are in reference to the VR headset. For example, for objects with starting position 0,0 and Z > 0 and ending position of 0,0,0 - the object will always fly directly to the camera regardless of the direction the participant looks." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="cameraLock">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="trackHead" class="font-weight-bold">Collect Head Position Data </label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Specify whether you would like to collect head tracking data." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="trackHead">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="trackController" class="font-weight-bold">Collect Controller Position Data </label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Specify whether you would like to collect controller tracking data." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="trackController">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="showFeedback" class="font-weight-bold">Show Feedback</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Specify whether you would like to show feedback." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="showFeedback">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="feedbackType" class="font-weight-bold">Feedback Type</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="If Show Feedback is True, select the feedback type. 1 = PM task feedback in seconds (approach motion only). 2 = Correct response feedback (e.g., if corrAns is 1 and they push Left, feedback is 'Correct'). If corrAns is 0, no feedback is shown." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-2">
+                <input type="number" class="form-control" id="feedbackType" placeholder="1" value="0">
+              </div>
+            </div>
+
+
+            <div class="form-group text-left">
+              <label for="feedbackColor" class="font-weight-bold">Feedback Color</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Choose any of the following colors for messages that will be displayed to subjects in between trials." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="feedbackColor">
+                  <option>Black</option>
+                  <option>Blue</option>
+                  <option>Cyan</option>
+                  <option>Gray</option>
+                  <option>Green</option>
+                  <option>Magenta</option>
+                  <option>Red</option>
+                  <option>White</option>
+                  <option>Yellow</option>
+                  <option>Clear</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="feedbackSize" class="font-weight-bold">Feedback Size</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="This determines the size of the feedback message shown to subjects. The default size is 75px." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <input type="number" class="form-control" id="feedbackSize" placeholder="75" step="0.01" value="75">
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="feedbackPos" class="font-weight-bold">Feedback Position</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="These coordinates determine the world location where messages will be displayed to the subject. The default coordinates are [0,6,100] but these can be adjusted based on the desired message position." style="font-size:15px;">help_outline</i>
+              <div class="form-group form-row" id="feedbackPos">
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">X:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="feedbackX" placeholder="0" value="0">
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Y:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="feedbackY" placeholder="6" value="6">
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Z:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="feedbackZ" placeholder="100" value="100">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="confidence" class="font-weight-bold">Collect Confidence Rating</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Specify whether you want to collect a confidence rating after the participant responds. NOTE: when this mode is active, the simulation waits for a 0-9 keyboard press. The experiment will need to press the button because the participant is in VR." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="confidence">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="ground" class="font-weight-bold">Display Ground Plane</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Choose whether to show the ground plane." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="ground">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="road" class="font-weight-bold">Display Roadway</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Choose whether to show the roadway." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="road">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="roadPos" class="font-weight-bold">Roadway Position</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Enter the location of where you want to display the road. Default is 0,0,5 = 5 units in front of a user standing at 0,0,0" style="font-size:15px;">help_outline</i>
+              <div class="form-group form-row" id="roadPos">
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">X:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="roadPosX" placeholder="0" value="0">
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Y:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="roadPosY" placeholder="0" value="0">
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Z:</div>
+                  </div>
+                  <input type="number" step="0.001" class="form-control" id="roadPosZ" placeholder="0" value="5">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="pressHold" class="font-weight-bold">Press Hold</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Change the response mode to press and hold. Primarily used in the street crossing experiments." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="pressHold">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-left">
+              <label for="debugging" class="font-weight-bold">Debugging</label>
+              <i class="material-icons text-muted" data-toggle="tooltip" data-placement="right" title="Choose whether to show debugging output in the Unity console." style="font-size:15px;">help_outline</i>
+              <div class="row col-md-3">
+                <select class="form-control" id="debugging">
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+            </div>
+
+
+
+            <hr class="mb-4 mt-4">
+
+
+            <div class="form-group">
+              <button name="data" class="btn btn-lg btn-secondary" type="button" onclick="createConfig()">Create Config File</button>
+            </div>
+          </form>
+      </main>
+
+      <footer class="mastfoot mt-auto"></footer>
+    </div>
+  </body>
+</html>
